@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Asclepios',
-  description: 'Created by infamous team from Uniwersytet Dolnośląski DSW',
+  description: 'Invented and created by infamous team from Uniwersytet Dolnośląski DSW',
 }
 
 export default function RootLayout({
