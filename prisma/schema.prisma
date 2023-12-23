@@ -10,20 +10,62 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        Int      @id @default(autoincrement())
-  username  String   @unique
-  email     String   @unique
-  password  String   @unique
-  userType  UserType
-  pesel      String? 
-  telephone String?  // Telephone is optional, adjust as needed
-  address   String?  // Address is optional, adjust as needed
+model Access {
+  ID     Int     @id @default(autoincrement())
+  Login  String
+  Password  String
 }
 
-enum UserType {
-  ADMIN
-  REGISTRATION_STAFF
-  DOCTOR
-  PATIENT
+model Doctors {
+  ID               Int     @id @default(autoincrement())
+  FirstName        String
+  LastName         String
+  Specialization   String
+  Phone_number     BigInt
+}
+
+model Patients {
+  ID               Int     @id @default(autoincrement())
+  FirstName        String
+  LastName         String
+  PESEL            BigInt
+  Email            String
+  Phone_number     BigInt
+  Address          String
+}
+
+model Registration_stuff {
+  ID               Int     @id @default(autoincrement())
+  FirstName        String
+  LastName         String
+  Phone_number     BigInt
+}
+
+model Services {
+  ID             Int     @id @default(autoincrement())
+  Type           String
+  Doctor_ID      Int
+  Price          Float
+  Duration       DateTime
+  Doctors        Doctors @relation(fields: [Doctor_ID], references: [ID])
+}
+
+model Appointments {
+  ID               Int     @id @default(autoincrement())
+  Patient_PESEL    BigInt
+  Patient_ID       Int
+  Doctor_ID        Int
+  Service_ID       Int
+  Date             DateTime
+  Time             DateTime @default(now())
+  Financing        FinancingEnum
+  Doctors          Doctors @relation(fields: [Doctor_ID], references: [ID])
+  Patients         Patients @relation(fields: [Patient_ID], references: [ID])
+  Services         Services   @relation(fields: [Service_ID], references: [ID])
+}
+
+enum Financing {
+  NFZ
+  Private
+  Benefit_System
 }
