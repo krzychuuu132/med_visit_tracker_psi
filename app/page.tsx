@@ -1,7 +1,94 @@
+import { PrismaClient } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
+const prisma = new PrismaClient();
 
-export default function Home() {
+export default async function Home() {
+  // // Example Data for Access model
+  // const accessData = {
+  //   login: "example_login",
+  //   password: "example_password",
+  // };
+
+  // // Create an example Access record
+  // const createdAccess = await prisma.access.create({
+  //   data: accessData,
+  // });
+  // console.log("Created Access:", createdAccess);
+
+  // // Example Data for Doctors model
+  // const doctorData = {
+  //   firstName: "John",
+  //   lastName: "Doe",
+  //   specialization: "General",
+  //   phone_number: BigInt(1234567890),
+  // };
+
+  // // Create an example Doctor record
+  // const createdDoctor = await prisma.doctors.create({
+  //   data: doctorData,
+  // });
+  // console.log("Created Doctor:", createdDoctor);
+
+  // // Example Data for Registration_stuff model
+  // const registrationStuffData = {
+  //   firstName: "Alice",
+  //   lastName: "Smith",
+  //   phone_number: BigInt(9876543210),
+  // };
+
+  // // Create an example Registration_stuff record
+  // const createdRegistrationStuff = await prisma.registration_stuff.create({
+  //   data: registrationStuffData,
+  // });
+  // console.log("Created Registration Stuff:", createdRegistrationStuff);
+
+  // // Example Data for Patients model
+  // const patientData = {
+  //   firstName: "Bob",
+  //   lastName: "Johnson",
+  //   pesel: BigInt(123456789012),
+  //   email: "bob@example.com",
+  //   phone_number: BigInt(5551234567),
+  //   address: "123 Main Street, City",
+  // };
+
+  // // Create an example Patient record
+  // const createdPatient = await prisma.patients.create({
+  //   data: patientData,
+  // });
+  // console.log("Created Patient:", createdPatient);
+
+  // // Example Data for Services model
+  // const serviceData = {
+  //   type: "Consultation",
+  //   doctor_id: createdDoctor.id, // Use the ID of the previously created doctor
+  //   price: 50.0,
+  //   duration: new Date("2022-12-31T12:00:00Z"),
+  // };
+
+  // // Create an example Service record
+  // const createdService = await prisma.services.create({
+  //   data: serviceData,
+  // });
+  // console.log("Created Service:", createdService);
+
+  // // Example Data for Appointments model
+  // const appointmentData = {
+  //   patient_pesel: createdPatient.pesel,
+  //   patient_id: createdPatient.id,
+  //   doctor_id: createdDoctor.id,
+  //   service_id: createdService.id,
+  //   date: new Date("2023-01-15"),
+  //   financing: "NFZ" as FinancingEnum,
+  // };
+
+  // // Create an example Appointment record
+  // const createdAppointment = await prisma.appointments.create({
+  //   data: appointmentData,
+  // });
+  // console.log("Created Appointment:", createdAppointment);
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 w-6">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
