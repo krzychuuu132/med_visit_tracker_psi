@@ -11,60 +11,68 @@ datasource db {
 }
 
 model Access {
-  ID     Int     @id @default(autoincrement())
-  Login  String
-  Password  String
+  id     Int     @id @default(autoincrement())
+  login  String
+  password  String
 }
 
 model Doctors {
-  ID               Int     @id @default(autoincrement())
-  FirstName        String
-  LastName         String
-  Specialization   String
-  Phone_number     BigInt
+  id               Int     @id @default(autoincrement())
+  firstName        String
+  lastName         String
+  specialization   String
+  phone_number     BigInt
+  appointments     Appointments[] // Adding the opposite relation field
+  services     Services[] // Adding the opposite relation field
+}
+
+
+// Osoby w rejestracji
+model Registration_stuff {
+  id               Int     @id @default(autoincrement())
+  firstName        String
+  lastName         String
+  phone_number     BigInt
 }
 
 model Patients {
-  ID               Int     @id @default(autoincrement())
-  FirstName        String
-  LastName         String
-  PESEL            BigInt
-  Email            String
-  Phone_number     BigInt
-  Address          String
+  id               Int     @id @default(autoincrement())
+  firstName        String
+  lastName         String
+  pesel            BigInt
+  email            String
+  phone_number     BigInt
+  address          String
+  appointments     Appointments[] // Adding the opposite relation field
 }
 
-model Registration_stuff {
-  ID               Int     @id @default(autoincrement())
-  FirstName        String
-  LastName         String
-  Phone_number     BigInt
-}
-
+// Usługi
 model Services {
-  ID             Int     @id @default(autoincrement())
-  Type           String
-  Doctor_ID      Int
-  Price          Float
-  Duration       DateTime
-  Doctors        Doctors @relation(fields: [Doctor_ID], references: [ID])
+  id             Int     @id @default(autoincrement())
+  type           String
+  doctor_id      Int
+  price          Float
+  duration       DateTime
+  doctors        Doctors @relation(fields: [doctor_id], references: [id])
+  appointments   Appointments[] // Adding the opposite relation field
 }
 
+//  Wizyty
 model Appointments {
-  ID               Int     @id @default(autoincrement())
-  Patient_PESEL    BigInt
-  Patient_ID       Int
-  Doctor_ID        Int
-  Service_ID       Int
-  Date             DateTime
-  Time             DateTime @default(now())
-  Financing        FinancingEnum
-  Doctors          Doctors @relation(fields: [Doctor_ID], references: [ID])
-  Patients         Patients @relation(fields: [Patient_ID], references: [ID])
-  Services         Services   @relation(fields: [Service_ID], references: [ID])
+  id               Int     @id @default(autoincrement())
+  patient_pesel    BigInt
+  patient_id      Int
+  doctor_id        Int
+  service_id       Int
+  date             DateTime
+  time             DateTime @default(now())
+  financing        FinancingEnum
+  doctor          Doctors @relation(fields: [doctor_id], references: [id])
+  patient         Patients @relation(fields: [patient_id], references: [id])
+  services         Services @relation(fields: [service_id], references: [id])
 }
 
-enum Financing {
+enum FinancingEnum {
   NFZ
   Private
   Benefit_System
